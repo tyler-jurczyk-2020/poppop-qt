@@ -1,5 +1,5 @@
-#ifndef __WINDOW_MANAGER_H
-#define __WINDOW_MANAGER_H
+#ifndef __WINDOW_FRAME_H
+#define __WINDOW_FRAME_H
 
 #include "ui_popup.h"
 #include <qmainwindow.h>

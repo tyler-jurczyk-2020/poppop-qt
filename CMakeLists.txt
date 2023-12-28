@@ -9,7 +9,14 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
 qt_standard_project_setup()
 
-qt_add_executable(poppop window_frame.h popup.ui window_frame.cc main.cc)
+qt_add_executable(poppop 
+                  popup.ui
+                  window_frame.h
+                  window_manager.h
+                  window_frame.cc
+                  window_manager.cc
+                  main.cc
+                  )
 
 target_link_libraries(poppop PUBLIC Qt6::Core Qt6::Gui Qt6::Widgets)
 
