@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.28.1)
+project(poppop CXX)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+
+qt_standard_project_setup()
+
+qt_add_executable(poppop window_frame.h popup.ui window_frame.cc main.cc)
+
+target_link_libraries(poppop PUBLIC Qt6::Core Qt6::Gui Qt6::Widgets)
+
