@@ -13,7 +13,7 @@ void WindowManager::spawn_window() {
 
 void WindowManager::handle_interaction() {
     qDebug() << "Handling in manager!" << Qt::endl;
-    emit info.accept(); 
+    info.hide();
 }
 
 WindowManager::WindowManager() : info(QMessageBox::Information, "mytitle", "mytext", QMessageBox::NoButton, nullptr, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus) {
