@@ -9,7 +9,7 @@ class WindowFrame : public QMainWindow {
     private:
         Ui::MainWindow ui;
     public:
-        WindowFrame(std::mt19937, std::uniform_int_distribution<std::mt19937::result_type>);
+        WindowFrame(std::mt19937 &, std::uniform_int_distribution<std::mt19937::result_type>);
         void grab_click();
 };
 

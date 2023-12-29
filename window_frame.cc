@@ -16,7 +16,7 @@ void WindowFrame::grab_click() {
     close();
 }
 
-WindowFrame::WindowFrame(std::mt19937 random_seed, std::uniform_int_distribution<std::mt19937::result_type> generator){
+WindowFrame::WindowFrame(std::mt19937 &random_seed, std::uniform_int_distribution<std::mt19937::result_type> generator){
     ui.setupUi(this); 
     int rnum = generator(random_seed);
     setWindowFlags(Qt::FramelessWindowHint
