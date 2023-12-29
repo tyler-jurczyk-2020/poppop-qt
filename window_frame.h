@@ -8,9 +8,10 @@
 class WindowFrame : public QMainWindow {
     private:
         Ui::MainWindow ui;
+        void grab_click();
     public:
         WindowFrame(std::mt19937 &, std::uniform_int_distribution<std::mt19937::result_type>);
-        void grab_click();
+        QPushButton &get_button();
 };
 
 #endif // __WINDOW_MANAGER_H
