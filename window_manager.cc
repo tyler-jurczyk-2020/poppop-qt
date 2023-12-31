@@ -16,7 +16,7 @@ void WindowManager::handle_interaction() {
     info.hide();
 }
 
-WindowManager::WindowManager() : info(QMessageBox::Information, "mytitle", "mytext", QMessageBox::NoButton, nullptr, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus) {
+WindowManager::WindowManager() : info(QMessageBox::Information, "MainWindow", "mytext", QMessageBox::NoButton, nullptr, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus) {
     
     // Setup random number generator to be used for all windows
     std::random_device dev;
