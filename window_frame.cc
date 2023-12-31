@@ -20,8 +20,8 @@ QPushButton &WindowFrame::get_button(){
     return *ui.pushButton;
 }
 
-WindowFrame::WindowFrame(std::mt19937 &random_seed, std::uniform_int_distribution<std::mt19937::result_type> generator) :
-rng_w(std::random_device()()), rng_h(std::random_device()()),
+WindowFrame::WindowFrame(std::mt19937 &random_seed, std::uniform_int_distribution<std::mt19937::result_type> generator, std::random_device::result_type seeder) :
+rng_w(seeder), rng_h(seeder),
 dist_w(std::uniform_int_distribution<std::mt19937::result_type>(0,1550)),
 dist_h(std::uniform_int_distribution<std::mt19937::result_type>(0,800)) {
     ui.setupUi(this); 
