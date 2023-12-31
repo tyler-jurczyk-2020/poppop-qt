@@ -9,6 +9,10 @@ class WindowFrame : public QMainWindow {
     private:
         Ui::MainWindow ui;
         void grab_click();
+        std::mt19937 rng_w;
+        std::mt19937 rng_h;
+        std::uniform_int_distribution<std::mt19937::result_type> dist_w;
+        std::uniform_int_distribution<std::mt19937::result_type> dist_h;
     public:
         WindowFrame(std::mt19937 &, std::uniform_int_distribution<std::mt19937::result_type>);
         QPushButton &get_button();
