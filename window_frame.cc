@@ -1,15 +1,3 @@
-#include <QApplication>
-#include <QTimer>
-#include <QPushButton>
-#include <QAbstractButton>
-#include <QObject>
-#include <QMetaMethod>
-#include <QMainWindow>
-#include <QObject>
-#include <QLineEdit>
-#include <qtmetamacros.h>
-#include <random>
-#include "ui_popup.h"
 #include "window_frame.h"
 
 void WindowFrame::grab_click() {
@@ -20,17 +8,15 @@ QPushButton &WindowFrame::get_button(){
     return *ui.pushButton;
 }
 
-WindowFrame::WindowFrame(std::mt19937 &random_seed, std::uniform_int_distribution<std::mt19937::result_type> generator, std::random_device::result_type seeder) :
-rng_w(seeder), rng_h(seeder),
-dist_w(std::uniform_int_distribution<std::mt19937::result_type>(0,1550)),
-dist_h(std::uniform_int_distribution<std::mt19937::result_type>(0,800)) {
+WindowFrame::WindowFrame(rngen &rngen, uniform_dist &image, uniform_dist &width, uniform_dist &height) :
+rng(rngen), image_dist(image), width_dist(width), height_dist(height) {
     ui.setupUi(this); 
 
-    int rnum = generator(random_seed);
+    int rnum = image_dist(rng);
     QString path = QString("../images/f_%1.jpg").arg(rnum);
     ui.label->setPixmap(QPixmap(path).scaledToHeight(500, Qt::SmoothTransformation));
 
-    setGeometry(dist_w(rng_w), dist_h(rng_h), ui.label->sizeHint().width(), ui.label->sizeHint().height());
+    setGeometry(width_dist(rng), height_dist(rng), ui.label->sizeHint().width(), ui.label->sizeHint().height());
     setWindowFlags(Qt::FramelessWindowHint
                          | Qt::WindowStaysOnTopHint
                          | Qt::WindowDoesNotAcceptFocus);

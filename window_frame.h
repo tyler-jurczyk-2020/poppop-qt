@@ -2,19 +2,21 @@
 #define __WINDOW_FRAME_H
 
 #include "ui_popup.h"
-#include <qmainwindow.h>
 #include <random>
+
+typedef std::uniform_int_distribution<std::mt19937::result_type> uniform_dist;
+typedef std::mt19937 rngen;
 
 class WindowFrame : public QMainWindow {
     private:
         Ui::MainWindow ui;
+        rngen &rng;
+        uniform_dist &image_dist;
+        uniform_dist &width_dist;
+        uniform_dist &height_dist;
         void grab_click();
-        std::mt19937 rng_w;
-        std::mt19937 rng_h;
-        std::uniform_int_distribution<std::mt19937::result_type> dist_w;
-        std::uniform_int_distribution<std::mt19937::result_type> dist_h;
     public:
-        WindowFrame(std::mt19937 &, std::uniform_int_distribution<std::mt19937::result_type>, std::random_device::result_type);
+        WindowFrame(rngen &, uniform_dist &, uniform_dist &, uniform_dist &);
         QPushButton &get_button();
 };
 
