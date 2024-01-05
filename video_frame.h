@@ -5,6 +5,7 @@
 #include <QMediaPlaylist>
 #include <QVideoWidget>
 #include <QMainWindow>
+#include <QGraphicsBlurEffect>
 #include "ui_video.h"
 
 class VideoFrame : public QMainWindow {
@@ -12,7 +13,7 @@ class VideoFrame : public QMainWindow {
         Ui::PoppopVideo ui;
         QMediaPlayer player;
         QMediaPlaylist playlist;
-        bool playQueued;
+        QGraphicsBlurEffect blur;
     public:
         VideoFrame();
         void handleMediaChange();

@@ -17,11 +17,24 @@
    <widget class="QVideoWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>160</y>
-      <width>391</width>
-      <height>301</height>
+      <x>0</x>
+      <y>190</y>
+      <width>788</width>
+      <height>291</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>130</y>
+      <width>191</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>background_image</string>
     </property>
    </widget>
   </widget>
