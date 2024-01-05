@@ -1,4 +1,5 @@
 #include "video_frame.h"
+#include <QTimer>
 #include <KX11Extras>
 
 VideoFrame::VideoFrame() {
@@ -30,22 +31,23 @@ void VideoFrame::handleAddedWindow(WId id) {
 }
 
 void VideoFrame::handleMediaChange() {
-    if (player.mediaStatus() == QMediaPlayer::LoadedMedia) {
+    // Smooths out transition between clips
+    if (player.mediaStatus() == QMediaPlayer::EndOfMedia) {
+        ui.widget->hide();
+        QTimer::singleShot(150, ui.widget, &QVideoWidget::show);
+    }
+    if (player.mediaStatus() == QMediaPlayer::BufferedMedia) {
         QRect workspace = KX11Extras::workArea();
         QSize resolution = player.metaData("Resolution").value<QSize>();
         float scaled_width = resolution.width() * (static_cast<float>(workspace.height()-32)/resolution.height());
-        qDebug() << scaled_width << Qt::endl;
         int horiz_center = (workspace.width() - 32 - scaled_width)/2;
         ui.widget->setGeometry(horiz_center, 0, scaled_width, workspace.height()-32);
-        qDebug() << player.availableMetaData() << Qt::endl;
+        show();
     }
 }
 
 void VideoFrame::play() {
     connect(KX11Extras::self(), &KX11Extras::windowAdded, this, &VideoFrame::handleAddedWindow);
     playlist.setCurrentIndex(0);
-    show();
     player.play();
-    //WId video_win = KX11Extras::windows().front();
-    //KX11Extras::setOnAllDesktops(video_win, true);
 }
