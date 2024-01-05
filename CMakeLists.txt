@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Multimedia MultimediaWidgets)
+find_package(KF5WindowSystem)
 
 add_executable(poppop 
                   popup.ui
@@ -19,4 +20,4 @@ add_executable(poppop
                   main.cc
                   )
 
-target_link_libraries(poppop PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(poppop PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets KF5::WindowSystem)

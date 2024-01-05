@@ -12,8 +12,10 @@ class VideoFrame : public QMainWindow {
         Ui::PoppopVideo ui;
         QMediaPlayer player;
         QMediaPlaylist playlist;
+        bool playQueued;
     public:
         VideoFrame();
+        void handleMediaChange();
         void play();
 };
 
