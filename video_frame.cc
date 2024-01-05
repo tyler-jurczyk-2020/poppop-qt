@@ -16,10 +16,17 @@ VideoFrame::VideoFrame() {
     ui.label->setGraphicsEffect(&blur);
 
     player.setVideoOutput(ui.widget);
+    // Loading media should NOT HAPPEN IN CONSTRUCTOR
     playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_1.mp4"));
+    playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_2.mp4"));
     player.setPlaylist(&playlist);
-
+    
     connect(&player, &QMediaPlayer::mediaStatusChanged, this, &VideoFrame::handleMediaChange);
+}
+
+void VideoFrame::handleAddedWindow(WId id) {
+    KX11Extras::setOnAllDesktops(id, true);
+    disconnect(KX11Extras::self(), &KX11Extras::windowAdded, this, &VideoFrame::handleAddedWindow);
 }
 
 void VideoFrame::handleMediaChange() {
@@ -35,7 +42,10 @@ void VideoFrame::handleMediaChange() {
 }
 
 void VideoFrame::play() {
-    playlist.setCurrentIndex(1); // Prevents delay?
+    connect(KX11Extras::self(), &KX11Extras::windowAdded, this, &VideoFrame::handleAddedWindow);
+    playlist.setCurrentIndex(0);
     show();
     player.play();
+    //WId video_win = KX11Extras::windows().front();
+    //KX11Extras::setOnAllDesktops(video_win, true);
 }

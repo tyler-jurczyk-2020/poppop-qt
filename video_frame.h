@@ -14,10 +14,13 @@ class VideoFrame : public QMainWindow {
         QMediaPlayer player;
         QMediaPlaylist playlist;
         QGraphicsBlurEffect blur;
+
+        void handleMediaChange();
+        void handleAddedWindow(WId);
+
     public:
         VideoFrame();
-        void handleMediaChange();
-        void play();
+                void play();
 };
 
 #endif
