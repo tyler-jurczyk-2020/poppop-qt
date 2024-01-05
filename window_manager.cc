@@ -16,7 +16,7 @@ void WindowManager::handle_interaction() {
 
 // NEED TO UPDATE RANGE OF NUMBER GENERATOR
 WindowManager::WindowManager() : 
-rng(dev()), image_dist(uniform_dist(1,3)),
+rng(dev()), image_dist(uniform_dist(1,10)),
 width_dist(uniform_dist(0,1550)),
 height_dist(uniform_dist(0,800)),
 info(QMessageBox::Information, "MainWindow", "mytext", QMessageBox::NoButton, nullptr, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus) {
