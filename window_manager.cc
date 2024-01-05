@@ -10,6 +10,10 @@ void WindowManager::spawn_window() {
 
 void WindowManager::handle_interaction() {
     qDebug() << "Handling in manager!" << Qt::endl;
+    vframe.player.setSource(QUrl("../videos/f_1.mp4"));
+    vframe.player.setVideoOutput(vframe.ui.widget);
+    vframe.show();
+    vframe.player.play();
     info.hide();
 }
 

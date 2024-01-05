@@ -2,6 +2,7 @@
 #define __WINDOW_MANAGER_H
 
 #include "window_frame.h"
+#include "video_frame.h"
 #include <QTimer>
 #include <QMessageBox>
 
@@ -13,6 +14,7 @@ class WindowManager : public QObject {
         uniform_dist width_dist;
         uniform_dist height_dist;
         std::vector<std::unique_ptr<WindowFrame>> frames;
+        VideoFrame vframe;
         QMessageBox info;
         QTimer timer;
         void spawn_window();
