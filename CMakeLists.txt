@@ -5,11 +5,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Multimedia MultimediaWidgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Multimedia MultimediaWidgets)
 
-qt_standard_project_setup()
-
-qt_add_executable(poppop 
+add_executable(poppop 
                   popup.ui
                   video.ui
                   window_frame.h
@@ -21,4 +19,4 @@ qt_add_executable(poppop
                   main.cc
                   )
 
-target_link_libraries(poppop PUBLIC Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Multimedia Qt6::MultimediaWidgets)
+target_link_libraries(poppop PUBLIC Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
