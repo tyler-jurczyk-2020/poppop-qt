@@ -20,7 +20,7 @@ class VideoFrame : public QMainWindow {
 
     public:
         VideoFrame();
-                void play();
+        void play();
 };
 
 #endif
