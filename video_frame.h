@@ -6,6 +6,9 @@
 #include <QVideoWidget>
 #include <QMainWindow>
 #include <QGraphicsBlurEffect>
+#include <QProcess>
+#include <QTimer>
+#include <vector>
 #include "ui_video.h"
 
 class VideoFrame : public QMainWindow {
@@ -14,6 +17,11 @@ class VideoFrame : public QMainWindow {
         QMediaPlayer player;
         QMediaPlaylist playlist;
         QGraphicsBlurEffect blur;
+        QGraphicsBlurEffect blur2;
+        QTimer adjuster;
+        bool is_label_two_next;
+        std::list<QPixmap> thumbnails;
+        QProcess volume_setter;
 
         void handleMediaChange();
         void handleAddedWindow(WId);
@@ -21,6 +29,7 @@ class VideoFrame : public QMainWindow {
     public:
         VideoFrame();
         void play();
+        void adjust_volume();
 };
 
 #endif

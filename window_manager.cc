@@ -30,5 +30,5 @@ info(QMessageBox::Information, "MainWindow", "mytext", QMessageBox::NoButton, nu
     
     // Setup timer
     connect(&timer, &QTimer::timeout, this, &WindowManager::spawn_window);
-    timer.start(8000);
+    timer.start(60000);
 }
