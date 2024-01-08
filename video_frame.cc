@@ -17,11 +17,11 @@ VideoFrame::VideoFrame() {
 
     player.setVideoOutput(ui.widget);
     // Loading media should NOT HAPPEN IN CONSTRUCTOR
-    playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_1.mp4"));
+    playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_3.mp4"));
     playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_2.mp4"));
     // Setup labels
-    thumbnails.push_back(QPixmap("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_1.jpg"));
-    thumbnails.push_back(QPixmap("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_2.jpg"));
+    thumbnails.emplace_back("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_1.jpg");
+    thumbnails.emplace_back("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_2.jpg");
     player.setPlaylist(&playlist);
     //Enable Audio
     player.setVolume(100);
@@ -29,7 +29,7 @@ VideoFrame::VideoFrame() {
     // Setup double buffered backgrounds
     is_label_two_next = true;
 
-    //connect(&adjuster, &QTimer::timeout, this, &VideoFrame::adjust_volume);
+    connect(&adjuster, &QTimer::timeout, this, &VideoFrame::adjust_volume);
 
     connect(&player, &QMediaPlayer::mediaStatusChanged, this, &VideoFrame::handleMediaChange);
 }
@@ -74,7 +74,6 @@ void VideoFrame::handleMediaChange() {
         }
         thumbnails.pop_front();
         show();
-        player.setPosition(28000);
     }
 }
 
