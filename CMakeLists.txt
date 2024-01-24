@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.28.1)
 project(poppop CXX)
+set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)

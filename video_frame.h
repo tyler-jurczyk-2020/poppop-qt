@@ -30,6 +30,7 @@ class VideoFrame : public QMainWindow {
         VideoFrame();
         void play();
         void adjust_volume();
+        void set_video(int);
 };
 
 #endif

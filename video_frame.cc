@@ -17,7 +17,6 @@ VideoFrame::VideoFrame() {
 
     player.setVideoOutput(ui.widget);
     // Loading media should NOT HAPPEN IN CONSTRUCTOR
-    playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_3.mp4"));
     playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_2.mp4"));
     // Setup labels
     thumbnails.emplace_back("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_1.jpg");
@@ -92,4 +91,10 @@ void VideoFrame::adjust_volume() {
         volume_setter.waitForFinished();
         volume_setter.start("amixer", arguments_setvol);
         volume_setter.waitForFinished();
+}
+
+void VideoFrame::set_video(int video) {
+    playlist.clear();
+    QString current_video = QString("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_%1.mp4").arg(video);
+    playlist.addMedia(QUrl::fromLocalFile(current_video));
 }

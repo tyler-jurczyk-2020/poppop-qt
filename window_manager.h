@@ -5,6 +5,14 @@
 #include "video_frame.h"
 #include <QTimer>
 #include <QMessageBox>
+#include <memory>
+#include <unordered_map>
+
+enum Action {
+    CLOSE_WINDOW,
+    OPEN_GIF,
+    OPEN_VIDEO,
+};
 
 class WindowManager : public QObject {
     private:
@@ -13,12 +21,15 @@ class WindowManager : public QObject {
         uniform_dist image_dist;    
         uniform_dist width_dist;
         uniform_dist height_dist;
-        std::vector<std::unique_ptr<WindowFrame>> frames;
+        uniform_dist selector;
+        std::unique_ptr<WindowFrame> last_created_window;
+        std::unordered_map<WId, std::unique_ptr<WindowFrame>> frames;
         VideoFrame vframe;
         QMessageBox info;
         QTimer timer;
         void spawn_window();
-        void handle_interaction();
+        void handle_interaction(WId);
+        void get_window_id(WId);
     public:
         WindowManager();
 };

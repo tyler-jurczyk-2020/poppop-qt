@@ -1,11 +1,12 @@
 #include "window_frame.h"
+#include <memory>
 
 void WindowFrame::grab_click() {
-    close();
+    emit received_button_push(wid);
 }
 
-QPushButton &WindowFrame::get_button(){
-    return *ui.pushButton;
+void WindowFrame::set_window_id(WId id) {
+    wid = id;
 }
 
 WindowFrame::WindowFrame(rngen &rngen, uniform_dist &image, uniform_dist &width, uniform_dist &height) :
