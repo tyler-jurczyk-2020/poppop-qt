@@ -21,26 +21,22 @@ void WindowManager::get_window_id(WId id) {
 void WindowManager::handle_interaction(WId id) {
     Action action = static_cast<Action>(selector(rng));
     switch (action) {
-        /*
         case OPEN_GIF:
             frames.erase(id);
             vframe.set_gifs({1, 2});
             vframe.play();
             break;
-        */
         case OPEN_VIDEO:
             frames.erase(id);
             vframe.set_video(1);
             vframe.play();
             break;
-        /*
         case CLOSE_WINDOW:
             frames.erase(id);
             break; 
         case OPEN_WINDOW:
             spawn_window();
             break;
-        */
         default:
             break;
     }
