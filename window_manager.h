@@ -9,6 +9,7 @@
 #include <unordered_map>
 
 enum Action {
+    OPEN_WINDOW,
     CLOSE_WINDOW,
     OPEN_GIF,
     OPEN_VIDEO,

@@ -20,6 +20,7 @@ class VideoFrame : public QMainWindow {
         QGraphicsBlurEffect blur2;
         QTimer adjuster;
         bool is_label_two_next;
+        bool is_video;
         std::list<QPixmap> thumbnails;
         QProcess volume_setter;
 
@@ -31,6 +32,7 @@ class VideoFrame : public QMainWindow {
         void play();
         void adjust_volume();
         void set_video(int);
+        void set_gifs(std::vector<int>);
 };
 
 #endif

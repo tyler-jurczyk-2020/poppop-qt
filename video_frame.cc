@@ -2,12 +2,14 @@
 #include <QAudioDeviceInfo>
 #include <KX11Extras>
 #include <memory>
+#include <vector>
 
 VideoFrame::VideoFrame() {
     ui.setupUi(this);
     QRect workspace = KX11Extras::workArea();
     setGeometry(16, 16, workspace.width() - 32, workspace.height() - 32);
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
+    setWindowTitle("poppop");
     ui.widget->raise();
     // Set blurring
     blur.setBlurRadius(100);
@@ -16,12 +18,8 @@ VideoFrame::VideoFrame() {
     ui.label_2->setGraphicsEffect(&blur2);
 
     player.setVideoOutput(ui.widget);
-    // Loading media should NOT HAPPEN IN CONSTRUCTOR
-    playlist.addMedia(QUrl::fromLocalFile("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_2.mp4"));
-    // Setup labels
-    thumbnails.emplace_back("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_1.jpg");
-    thumbnails.emplace_back("/home/tysonthebison/.config/systemd/poppop-qt/videos/thumbnails/f_2.jpg");
     player.setPlaylist(&playlist);
+
     //Enable Audio
     player.setVolume(100);
 
@@ -55,23 +53,24 @@ void VideoFrame::handleMediaChange() {
 
         adjuster.start(200);
 
-        
-        // Setup corresponding background picture
-        QPixmap pixmap = thumbnails.front().scaledToWidth(workspace.width() - 32, Qt::SmoothTransformation);
-        float upshift = -1.0f*(pixmap.height() - workspace.height())/2;
-        if (is_label_two_next) {
-            ui.label_2->setPixmap(pixmap);
-            ui.label_2->setGeometry(0, upshift, pixmap.width(), pixmap.height());
-            ui.label->lower();
-            is_label_two_next = false;
+        if(!is_video) { 
+            // Setup corresponding background picture
+            QPixmap pixmap = thumbnails.front().scaledToWidth(workspace.width() - 32, Qt::SmoothTransformation);
+            float upshift = -1.0f*(pixmap.height() - workspace.height())/2;
+            if (is_label_two_next) {
+                ui.label_2->setPixmap(pixmap);
+                ui.label_2->setGeometry(0, upshift, pixmap.width(), pixmap.height());
+                ui.label->lower();
+                is_label_two_next = false;
+            }
+            else {
+                ui.label->setPixmap(pixmap);
+                ui.label->setGeometry(0, upshift, pixmap.width(), pixmap.height());
+                ui.label_2->lower();
+                is_label_two_next = true;
+            }
+            thumbnails.pop_front();
         }
-        else {
-            ui.label->setPixmap(pixmap);
-            ui.label->setGeometry(0, upshift, pixmap.width(), pixmap.height());
-            ui.label_2->lower();
-            is_label_two_next = true;
-        }
-        thumbnails.pop_front();
         show();
     }
 }
@@ -94,7 +93,20 @@ void VideoFrame::adjust_volume() {
 }
 
 void VideoFrame::set_video(int video) {
+    is_video = true;
     playlist.clear();
     QString current_video = QString("/home/tysonthebison/.config/systemd/poppop-qt/videos/f_%1.mp4").arg(video);
     playlist.addMedia(QUrl::fromLocalFile(current_video));
+}
+
+void VideoFrame::set_gifs(std::vector<int> gifs) {
+    is_video = false;
+    playlist.clear();
+    thumbnails.clear();
+    for(auto &gif : gifs) {
+        QString current_gif = QString("/home/tysonthebison/.config/systemd/poppop-qt/gifs/f_%1.mp4").arg(gif);
+        playlist.addMedia(QUrl::fromLocalFile(current_gif));
+        QString current_thumb = QString("/home/tysonthebison/.config/systemd/poppop-qt/gifs/thumbnails/f_%1.jpg").arg(gif);
+        thumbnails.emplace_back(current_thumb);
+    }
 }

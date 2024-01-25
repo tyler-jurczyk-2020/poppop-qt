@@ -18,10 +18,9 @@ rng(rngen), image_dist(image), width_dist(width), height_dist(height) {
     ui.label->setPixmap(QPixmap(path).scaledToHeight(500, Qt::SmoothTransformation));
 
     setGeometry(width_dist(rng), height_dist(rng), ui.label->sizeHint().width(), ui.label->sizeHint().height());
-    setWindowFlags(Qt::FramelessWindowHint
-                         | Qt::WindowStaysOnTopHint
-                         | Qt::WindowDoesNotAcceptFocus);
+    setWindowTitle("poppop");
     connect(ui.pushButton, &QPushButton::clicked, this, &WindowFrame::grab_click);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
     show();
 }
 

@@ -14,22 +14,33 @@ void WindowManager::get_window_id(WId id) {
     connect(last_created_window.get(), &WindowFrame::received_button_push, this, &WindowManager::handle_interaction);
     frames.insert({id, std::move(last_created_window)});
     info.setText("New window spawned!");
-    info.show();
+//    info.show();
     disconnect(KX11Extras::self(), &KX11Extras::windowAdded, this, &WindowManager::get_window_id);
 }
 
 void WindowManager::handle_interaction(WId id) {
     Action action = static_cast<Action>(selector(rng));
     switch (action) {
+        /*
         case OPEN_GIF:
-            break;
-        case OPEN_VIDEO:
             frames.erase(id);
-            vframe.set_video(3);
+            vframe.set_gifs({1, 2});
             vframe.play();
             break;
+        */
+        case OPEN_VIDEO:
+            frames.erase(id);
+            vframe.set_video(1);
+            vframe.play();
+            break;
+        /*
         case CLOSE_WINDOW:
+            frames.erase(id);
             break; 
+        case OPEN_WINDOW:
+            spawn_window();
+            break;
+        */
         default:
             break;
     }
@@ -41,7 +52,7 @@ WindowManager::WindowManager() :
 rng(dev()), image_dist(uniform_dist(1,10)),
 width_dist(uniform_dist(0,1550)),
 height_dist(uniform_dist(0,800)),
-selector(uniform_dist(0,2)),
+selector(uniform_dist(0,3)),
 info(QMessageBox::Information, "MainWindow", "mytext", QMessageBox::NoButton, nullptr, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus) {
     
     // Modify popup
